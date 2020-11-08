@@ -17,7 +17,8 @@ package_patterns = [
     url(r'^signoff/revoke/$', views.signoff_package, {'revoke': True}),
     url(r'^signoff/options/$', views.signoff_options),
     url(r'^download/$', views.download),
-    #url(r'^sonames/$', views.sogrep),
+    url(r'^sonames/$', views.display.sonames),
+    url(r'^sonames/json/$', views.display.sonames_json),
 ]
 
 urlpatterns = [

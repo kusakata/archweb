@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.contrib.sitemaps import views as sitemap_views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
 
 from django.views.decorators.cache import cache_page
 from django.views.generic import TemplateView
@@ -39,7 +40,7 @@ news_sitemaps = {'news': sitemaps.RecentNewsSitemap}
 urlpatterns = []
 
 # Public pages
-urlpatterns.extend([
+urlpatterns.extend(i18n_patterns(
     path('', public.views.index, name='index'),
     path('about/', TemplateView.as_view(template_name='public/about.html'), name='page-about'),
     path('art/',   TemplateView.as_view(template_name='public/art.html'), name='page-art'),
@@ -50,7 +51,8 @@ urlpatterns.extend([
     path('master-keys/json/', public.views.keys_json, name='pgp-keys-json'),
     re_path(r'^people/(?P<slug>[-\w]+)/$', public.views.people, name='people'),
     path('planet/', planet.views.index, name='planet'),
-])
+    prefix_default_language=False
+))
 
 # Feeds patterns, used below
 feeds_patterns = [
@@ -76,7 +78,7 @@ urlpatterns.extend([
 ])
 
 # Includes and other remaining stuff
-urlpatterns.extend([
+urlpatterns.extend(i18n_patterns(
     path('admin/', admin.site.urls),
     path('devel/', include(devel.urls)),
     path('feeds/', include(feeds_patterns)),
@@ -90,7 +92,8 @@ urlpatterns.extend([
     path('visualize/', include(visualize.urls)),
     path('opensearch/packages/', packages.views.opensearch, name='opensearch-packages'),
     path('opensearch/packages/suggest', packages.views.opensearch_suggest, name='opensearch-packages-suggest'),
-])
+    prefix_default_language=False
+))
 
 # Sitemaps
 urlpatterns.extend([

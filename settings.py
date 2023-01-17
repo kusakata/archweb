@@ -32,11 +32,25 @@ TIME_ZONE = 'UTC'
 LANGUAGE_CODE = 'en-us'
 DEFAULT_CHARSET = 'utf-8'
 
+# Restrict the language selection to a subset of provided languages
+from django.utils.translation import gettext_lazy as _
+LANGUAGES = [
+    ('en', _('English')),
+    ('ja', _('Japanese')),
+]
+
+# Locate translation files
+BASE_DIR = path.dirname(path.abspath(__file__))
+LOCALE_PATHS = [path.join(BASE_DIR, 'locale')]
+
 SITE_ID = 1
 
 # Default date format in templates for 'date' filter
 DATE_FORMAT = 'Y-m-d'
 DATETIME_FORMAT = 'Y-m-d H:i'
+
+# Enable translations
+USE_I18N = True
 
 # Disable so our own DATE_FORMAT/DATETIME_FORMAT is used.
 USE_L10N = False
@@ -49,6 +63,7 @@ LOGIN_REDIRECT_URL = '/'
 AUTH_PROFILE_MODULE = 'devel.UserProfile'
 
 MIDDLEWARE = (
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

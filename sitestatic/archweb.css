@@ -558,6 +558,11 @@ h3 span.arrow {
     padding-left: 1em;
 }
 
+/* home: selectlang box */
+#selectlang {
+    text-align: right;
+}
+
 /* home: pkgsearch box */
 #pkgsearch {
     padding: 1em 0.75em;

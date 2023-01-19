@@ -113,6 +113,11 @@ urlpatterns.extend([
     path('logout/', auth_views.LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
 ])
 
+# i18n
+urlpatterns.extend([
+    path('i18n/', include('django.conf.urls.i18n')),
+])
+
 # django-toolbar
 if settings.DEBUG_TOOLBAR:  # pragma: no cover
     import debug_toolbar
